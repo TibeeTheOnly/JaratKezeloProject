@@ -2,14 +2,34 @@
 {
     public class Jarat
     {
-        List<Itiner> jaratok = new List<Itiner>();
+        internal List<Itiner> jaratok = new List<Itiner>();
 
         internal void UjJarat(string jaratSzam, string repterHonnan, string repterHova, DateTime indulas)
         {
-            if (jaratSzam != null && repterHonnan != null && repterHova != null && repterHonnan != repterHova)
+            if (jaratSzam != "" && repterHonnan != "" && repterHova != "" && repterHonnan != repterHova && jaratSzam != null && repterHonnan != null && repterHonnan != null && indulas > DateTime.Now)
             {
                 DateTime pontosIndulas = indulas;
-                jaratok.Add(new Itiner(jaratSzam, repterHonnan, repterHova, indulas, pontosIndulas));
+                this.jaratok.Add(new Itiner(jaratSzam, repterHonnan, repterHova, indulas, pontosIndulas));
+            }
+            else if(jaratSzam == "")
+            {
+                throw new ArgumentException("Hibás járatszám!");
+            }
+            else if(repterHonnan == "")
+            {
+                throw new ArgumentException("Hibás kiindulási reptér!");
+            }
+            else if(repterHova == "")
+            {
+                throw new ArgumentException("Hibás érkezési reptér!");
+            }
+            else if(repterHonnan == repterHova)
+            {
+                throw new ArgumentException("Hibás érkezési reptér!");
+            }
+            else if(indulas < DateTime.Now)
+            {
+                throw new ArgumentException("Hibás dátum!");
             }
         }
 
@@ -18,14 +38,7 @@
             var itiner = jaratok.Find(x => x.JaratSzam == jaratszam);
             if (itiner != null)
             {
-                if (keses > 0)
-                {
-                    itiner.PontosIndulas = itiner.Indulas.AddMinutes(keses);
-                }
-                else if (keses < 0)
-                {
-                    itiner.PontosIndulas = itiner.Indulas.AddMinutes(keses);
-                }
+                itiner.PontosIndulas = itiner.PontosIndulas.AddMinutes(keses);
             }
             if (itiner.PontosIndulas < itiner.Indulas)
             {
@@ -58,6 +71,19 @@
                 }
             }
             return jaratokRepterrol;
+        }
+
+        internal Itiner jaratKereso(string jaratszam)
+        {
+            var itiner = jaratok.Find(x => x.JaratSzam == jaratszam);
+            if (itiner == null)
+            {
+                throw new ArgumentException("Nincs ilyen járat!");
+            }
+            else
+            {
+                return itiner;
+            }
         }
     }
     public class NegativKesesException : Exception
