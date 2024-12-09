@@ -6,7 +6,7 @@
 
         internal void UjJarat(string jaratSzam, string repterHonnan, string repterHova, DateTime indulas)
         {
-            if (jaratSzam != "" && repterHonnan != "" && repterHova != "" && repterHonnan != repterHova && jaratSzam != null && repterHonnan != null && repterHonnan != null && indulas > DateTime.Now)
+            if (jaratSzam != "" && repterHonnan != "" && repterHova != "" && repterHonnan != repterHova && jaratSzam != null && repterHonnan != null && repterHova != null && indulas > DateTime.Now)
             {
                 DateTime pontosIndulas = indulas;
                 this.jaratok.Add(new Itiner(jaratSzam, repterHonnan, repterHova, indulas, pontosIndulas));
@@ -20,6 +20,18 @@
                 throw new ArgumentException("Hibás kiindulási reptér!");
             }
             else if(repterHova == "")
+            {
+                throw new ArgumentException("Hibás érkezési reptér!");
+            }
+            else if (jaratSzam == null)
+            {
+                throw new ArgumentException("Hibás járatszám!");
+            }
+            else if (repterHonnan == null)
+            {
+                throw new ArgumentException("Hibás kiindulási reptér!");
+            }
+            else if (repterHova == null)
             {
                 throw new ArgumentException("Hibás érkezési reptér!");
             }

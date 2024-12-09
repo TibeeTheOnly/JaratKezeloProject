@@ -38,6 +38,8 @@ namespace ClassLibrary1
         {
             var hiba = Assert.Throws<ArgumentException>(() => j.UjJarat("", "LHBP", "KLAX", new DateTime(2026, 12, 03, 15, 30, 0)));
             Assert.That(hiba.Message, Is.EqualTo("Hibás járatszám!"));
+            var hiba2 = Assert.Throws<ArgumentException>(() => j.UjJarat(null, "LHBP", "KLAX", new DateTime(2026, 12, 03, 15, 30, 0)));
+            Assert.That(hiba2.Message, Is.EqualTo("Hibás járatszám!"));
         }
 
         [Test]
@@ -45,6 +47,8 @@ namespace ClassLibrary1
         {
             var hiba = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", "", "KLAX", new DateTime(2026, 12, 03, 15, 30, 0)));
             Assert.That(hiba.Message, Is.EqualTo("Hibás kiindulási reptér!"));
+            var hiba2 = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", null, "KLAX", new DateTime(2026, 12, 03, 15, 30, 0)));
+            Assert.That(hiba2.Message, Is.EqualTo("Hibás kiindulási reptér!"));
         }
 
         [Test]
@@ -52,6 +56,8 @@ namespace ClassLibrary1
         {
             var hiba = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", "LHBP", "", new DateTime(2026, 12, 03, 15, 30, 0)));
             Assert.That(hiba.Message, Is.EqualTo("Hibás érkezési reptér!"));
+            var hiba2 = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", "LHBP", null, new DateTime(2026, 12, 03, 15, 30, 0)));
+            Assert.That(hiba2.Message, Is.EqualTo("Hibás érkezési reptér!"));
         }
         
         [Test]
