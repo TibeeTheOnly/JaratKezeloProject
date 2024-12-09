@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace ClassLibrary1.Teszt
 {
     [TestFixture]
     internal class JaratKezeloTeszt
@@ -59,7 +59,7 @@ namespace ClassLibrary1
             var hiba2 = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", "LHBP", null, new DateTime(2026, 12, 03, 15, 30, 0)));
             Assert.That(hiba2.Message, Is.EqualTo("Hibás érkezési reptér!"));
         }
-        
+
         [Test]
         public void UjJaratKiindulasEgyezikAzErkezessel()
         {
@@ -67,7 +67,7 @@ namespace ClassLibrary1
             Assert.That(hiba.Message, Is.EqualTo("Hibás érkezési reptér!"));
         }
 
-        [Test]      
+        [Test]
         public void UjJaratHibasDatum()
         {
             var hiba = Assert.Throws<ArgumentException>(() => j.UjJarat("MA420", "LHBP", "KLAX", DateTime.Now.AddDays(-1)));
@@ -117,7 +117,7 @@ namespace ClassLibrary1
         {
             Assert.That(j.jaratKereso("MA420"), Is.Not.Null);
         }
-        
+
         [Test]
         public void JaratKeresoNemLetezoJarat()
         {
